@@ -1,7 +1,8 @@
-###About###
+## About
+
 The image meant to be close enough to what pleroma project provides to ease the migration.
 
-###How to start###
+## How to start
 
 0. Ensure you have Docker `buildx` extension installed.
 1. First edit the env files. Set the correct address.
@@ -22,7 +23,7 @@ The image meant to be close enough to what pleroma project provides to ease the 
 8. Create admin user `docker exec -it pleroma sh ./bin/pleroma_ctl user new adminusername admin@change.it --admin`
 
 
-##Other images###
+## Other images
 
 - [angristan/docker-pleroma](https://github.com/angristan/docker-pleroma)
 - [potproject/docker-pleroma](https://github.com/potproject/docker-pleroma)
