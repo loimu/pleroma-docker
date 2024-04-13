@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  pleroma:
+    image: pleroma
+    container_name: "pleroma"
+    hostname: "pleroma"
+    labels:
+      - "org.label-schema.group=pleroma"
+    restart: always
+    build:
+      context: .
+    env_file: ./environments/pleroma/pleroma.env
+    depends_on:
+      - pleroma-db
+    ports:
+      - "127.0.0.1:4000:4000"
+    volumes:
+      - ./volumes/pleroma/config.exs:/var/lib/pleroma/config.exs
+      - ./volumes/pleroma/uploads:/var/lib/pleroma/uploads
+      - ./volumes/pleroma/static:/var/lib/pleroma/static
+
+  pleroma-db:
+    image: postgres:12-alpine
+    container_name: "pleroma-db"
+    hostname: "pleroma-db"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=False"
+      - "org.label-schema.group=pleroma"
+    restart: always
+    env_file: ./environments/pleroma-db/postgres.env
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ./volumes/pleroma-db/pgdata:/var/lib/postgresql/data
+      - ./volumes/pleroma-db/pginit:/docker-entrypoint-initdb.d
