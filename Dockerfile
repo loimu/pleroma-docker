@@ -1,4 +1,4 @@
-FROM elixir:1.15-otp-25-alpine
+FROM elixir:1.16-otp-25-alpine
 
 ARG PLEROMA_VER=develop
 ARG UID=911
@@ -8,7 +8,7 @@ ENV MIX_ENV=prod
 RUN echo "http://nl.alpinelinux.org/alpine/latest-stable/main" >> /etc/apk/repositories \
     && apk update && apk upgrade \
     && apk add git gcc g++ musl-dev make cmake file-dev \
-    exiftool imagemagick libmagic ncurses postgresql-client ffmpeg libc6-compat curl
+    exiftool imagemagick libmagic ncurses postgresql-client ffmpeg
 
 RUN addgroup -g ${GID} pleroma \
     && adduser -h /pleroma -s /bin/false -D -G pleroma -u ${UID} pleroma
